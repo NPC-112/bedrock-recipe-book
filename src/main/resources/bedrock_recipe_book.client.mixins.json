@@ -1,0 +1,19 @@
+{
+  "required": true,
+  "package": "dev.bedrockrecipebook.mixin.client",
+  "compatibilityLevel": "JAVA_25",
+  "client": [
+    "CraftingScreenMixin",
+    "InventoryScreenMixin",
+    "RecipeBookMouseScrollMixin",
+    "RecipeBookScreenAccessor",
+    "ContainerScreenAccessor",
+    "RecipeBookBoundsMixin",
+    "RecipeBookComponentAccessor",
+    "RecipeSearchTextPositionMixin",
+    "GhostSlotComponentDisplayMixin"
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  }
+}

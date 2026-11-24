@@ -1,0 +1,16 @@
+{
+  "required": true,
+  "package": "dev.bedrockrecipebook.mixin.controlify",
+  "plugin": "dev.bedrockrecipebook.mixin.ControlifyMixinPlugin",
+  "compatibilityLevel": "JAVA_25",
+  "client": [
+    "ControlifyInputMixin",
+    "ControlifyRecipeProcessorMixin",
+    "ControlifySnapPointsMixin",
+    "ControlifySnapMovementMixin",
+    "ControlifySearchFocusMixin",
+    "ControlifySearchBackspaceMixin",
+    "ControlifySearchInputDiagnosticsMixin"
+  ],
+  "injectors": { "defaultRequire": 1 }
+}

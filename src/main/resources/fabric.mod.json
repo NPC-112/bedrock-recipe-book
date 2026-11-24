@@ -1,0 +1,37 @@
+{
+  "schemaVersion": 1,
+  "id": "bedrock_recipe_book",
+  "version": "${version}",
+  "name": "Bedrock Recipe Book",
+  "description": "A Bedrock desktop-style crafting recipe book for Minecraft Java Edition.",
+  "authors": ["Bedrock Recipe Book contributors"],
+  "license": "MIT",
+  "environment": "client",
+  "entrypoints": {
+    "client": [
+      "dev.bedrockrecipebook.client.BedrockRecipeBookClient"
+    ]
+  },
+  "mixins": [
+    {
+      "config": "bedrock_recipe_book.client.mixins.json",
+      "environment": "client"
+    },
+    {
+      "config": "bedrock_recipe_book.controlify.mixins.json",
+      "environment": "client"
+    }
+  ],
+  "depends": {
+    "fabricloader": ">=0.20.1",
+    "minecraft": "~26.3",
+    "java": ">=25",
+    "fabric-api": "*"
+  },
+  "suggests": {
+    "controlify": "*"
+  },
+  "breaks": {
+    "controlify": "<3.5.3"
+  }
+}

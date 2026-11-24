@@ -1,0 +1,85 @@
+plugins {
+	id "net.fabricmc.fabric-loom" version "${loom_version}"
+	id "maven-publish"
+}
+
+version = project.mod_version
+group = project.maven_group
+
+base {
+	archivesName = project.archives_base_name
+}
+
+loom {
+	splitEnvironmentSourceSets()
+
+	mods {
+		"bedrock_recipe_book" {
+			sourceSet sourceSets.main
+			sourceSet sourceSets.client
+		}
+	}
+}
+
+repositories {
+	mavenCentral()
+	maven {
+		name = "Modrinth"
+		url = "https://api.modrinth.com/maven"
+	}
+}
+
+dependencies {
+	minecraft "com.mojang:minecraft:${project.minecraft_version}"
+	implementation "net.fabricmc:fabric-loader:${project.loader_version}"
+	implementation "net.fabricmc.fabric-api:fabric-api:${project.fabric_api_version}"
+	compileOnly "maven.modrinth:controlify:3.5.3+mc26.3"
+}
+
+processResources {
+	inputs.property "version", project.version
+
+	filesMatching("fabric.mod.json") {
+		expand "version": project.version
+	}
+}
+
+tasks.withType(JavaCompile).configureEach {
+	options.release = 25
+}
+
+java {
+	toolchain {
+		languageVersion = JavaLanguageVersion.of(25)
+	}
+	withSourcesJar()
+}
+
+sourceSets {
+navigationChecks {
+compileClasspath += sourceSets.main.output
+runtimeClasspath += sourceSets.main.output
+}
+}
+
+tasks.register("verifyRecipeScrolling", JavaExec) {
+dependsOn navigationChecksClasses
+classpath = sourceSets.navigationChecks.runtimeClasspath
+mainClass = "dev.bedrockrecipebook.navigation.RecipeGridViewportChecks"
+}
+
+check.dependsOn verifyRecipeScrolling
+
+tasks.register("verifyBedrockCatalog", JavaExec) {
+dependsOn navigationChecksClasses, processResources
+classpath = sourceSets.navigationChecks.runtimeClasspath
+mainClass = "dev.bedrockrecipebook.catalog.BedrockRecipeCatalogChecks"
+}
+
+check.dependsOn verifyBedrockCatalog
+
+jar {
+	from("LICENSE") {
+		rename { "${it}_${project.archives_base_name}" }
+	}
+}
