@@ -1,10 +1,28 @@
-name: Build
+name: Build mod
 
 on:
   push:
-    branches:
-      - main
+    paths:
+      - "src/**"
+      - "build.gradle"
+      - "**/*.gradle"
+      - "gradle.properties"
+      - "settings.gradle"
+      - "gradle/**"
+      - "gradlew"
+      - "gradlew.bat"
+      - ".github/workflows/build.yml"
   pull_request:
+    paths:
+      - "src/**"
+      - "build.gradle"
+      - "**/*.gradle"
+      - "gradle.properties"
+      - "settings.gradle"
+      - "gradle/**"
+      - "gradlew"
+      - "gradlew.bat"
+      - ".github/workflows/build.yml"
   workflow_dispatch:
 
 permissions:
@@ -12,7 +30,7 @@ permissions:
 
 jobs:
   build:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-26.04
     steps:
       - name: Check out source
         uses: actions/checkout@v7
@@ -25,16 +43,15 @@ jobs:
 
       - name: Set up Gradle
         uses: gradle/actions/setup-gradle@v6
-
-      - name: Run checks and build
-        run: ./gradlew check build
-
-      - name: Save mod JAR
-        uses: actions/upload-artifact@v4
         with:
-          name: bedrock-recipe-book-${{ github.sha }}
-          path: |
-            build/libs/bedrock-recipe-book-*.jar
-            !build/libs/*-sources.jar
+          gradle-version: "9.8.2"
+
+      - name: Build Fabric mod
+        run: gradle --no-daemon build
+
+      - name: Upload mod JAR
+        uses: actions/upload-artifact@v7
+        with:
+          name: bedrock-recipe-book
+          path: build/libs/*.jar
           if-no-files-found: error
-          retention-days: 14

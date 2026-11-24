@@ -18,7 +18,7 @@ GitHub Actions runs the project checks and build on pushes and pull requests. Su
 To build locally from this directory:
 
 ```sh
-./gradlew check build
+./gradlew build
 ```
 
 To launch a development client:
