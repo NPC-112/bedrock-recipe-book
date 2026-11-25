@@ -2,6 +2,8 @@
 
 Bedrock Recipe Book is a client-side Fabric mod for Minecraft Java Edition 26.3. It replaces the recipe-book interface with a layout inspired by the Bedrock desktop UI while continuing to use Java's recipe data and normal server-validated crafting. Supports Controlify integration. Made for people that want their bedrock friends to play java. Might expand to more UIs in the future.
 
+I am sorry this is vibecoded. Use at your own risk
+
 ## Features
 
 - Bedrock-inspired recipe panel for both inventory crafting and crafting tables.
@@ -10,6 +12,7 @@ Bedrock Recipe Book is a client-side Fabric mod for Minecraft Java Edition 26.3.
 - Toggle between showing all recipes and craftable recipes only.
 - Choose instant crafting or filling the crafting grid.
 - collapsible related recipes.
+- general ai vibecoded weirdness. Might not work for you like it does for me. Or at all possibly.
 
 ## Build
 
